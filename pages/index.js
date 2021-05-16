@@ -1,34 +1,18 @@
-import React from 'react'
-import {Button} from "antd";
-import Header from "../components/Header";
-import Link from "next/link";
+import React, {useEffect} from 'react'
+import axios from "axios";
 import styled from "styled-components";
+import getConfig from "next/config";
 
+const {publicRuntimeConfig} = getConfig()
 const Title = styled.span`
   color: red;
   font-size: 12px;
 `
 const App = () => {
-  return <div className={'name'}>
-    <Header>
-      <Link href={'/user?id=1'} as={'/user/1'} title={'用户'}>
-        <Button>用户</Button>
-      </Link>
-      <Link href={'/content'} title={'内容'}>
-        <Button>内容</Button>
-      </Link>
-    </Header>
-    <Title>
-      zzw666!
-    </Title>
-    <style jsx>
-      {
-        `.name {
-          color: red;
-        }`
-      }
-    </style>
-  </div>
+  useEffect(() => {
+    axios.get('/api/user/info').then(res => console.log(res)).catch(e => console.log(e))
+  }, [])
+  return <div>123</div>
 }
 
 export default App
